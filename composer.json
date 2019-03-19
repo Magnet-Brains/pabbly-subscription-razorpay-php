@@ -1,0 +1,6 @@
+{
+    "require": {
+        "razorpay/razorpay": "2.*",
+        "php-curl-class/php-curl-class": "^8.5"
+    }
+}
