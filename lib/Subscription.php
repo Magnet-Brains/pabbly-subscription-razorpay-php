@@ -15,6 +15,8 @@ class Subscription {
         }
         $this->apiKey = $apiKey;
         $this->apiSecret = $apiSecret;
+        // $this->apiUrl = "http://localhost:1337/v1/";
+        // $this->thankyouUrl = "http://localhost:5000/thankyou/";
     }
 
     function apiPath($path) {
@@ -47,7 +49,7 @@ class Subscription {
             throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
         }
         if ($curl->response->status == 'error') {
-            throw new Exception('Error: ' . $curl->response->message);
+            throw new Exception('Subscribe Error: ' . $curl->response->message);
         }
         return $curl->response->data;
     }
@@ -72,10 +74,10 @@ class Subscription {
             'transaction' => $transaction_data
         ));
         if ($curl->error) {
-            throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
+            throw new Exception('Record Payment Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
         }
         if ($curl->response->status == 'error') {
-            throw new Exception('Error: ' . $curl->response->message);
+            throw new Exception('Record Payment Error: ' . $curl->response->message);
         }
         return $curl->response->data;
     }
@@ -104,10 +106,10 @@ class Subscription {
             'hostedpage' => $hostedpage
         ));
         if ($curl->error) {
-            throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
+            throw new Exception('Hosted Page Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
         }
         if ($curl->response->status == 'error') {
-            throw new Exception('Error: ' . $curl->response->message);
+            throw new Exception('Hosted Page Error: ' . $curl->response->message);
         }
         return $curl->response->data;
     }
