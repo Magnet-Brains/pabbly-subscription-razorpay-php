@@ -1,10 +1,11 @@
 <?php
-
+//Razorpay api credential
 $keyId = ''; //Put your Razorpay key 
 $keySecret = ''; //Pur your Razorpay secret key
 
+//Pably Subscriptions api credentials
 $apiKey = ''; //Put Pabbly api key here
-$apiKeySecret = ''; //Put Pabbly api secret here
+$apiSecret = ''; //Put Pabbly api secret here
 
 $displayCurrency = 'INR';
 
