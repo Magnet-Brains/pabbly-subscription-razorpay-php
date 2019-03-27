@@ -10,7 +10,7 @@ Generally there are two methods available.
 
 If you want to use through checkout page, use the process-with-checkout-page.php and if you want to use through api, use process-with-api.php
 
-You can also checkout [Custom gateway integration guide from here](https://github.com/MagnetBrains/pabbly-subscription-custom-gatewa)
+You can also checkout [Custom gateway integration guide from here](https://github.com/MagnetBrains/pabbly-subscription-custom-gateway)
 
 # Razorpay PHP SDK
 
