@@ -8,8 +8,9 @@ require __DIR__ . '/lib/Subscription.php';
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
 
+$error = '<strong style="color:red;">Error: </strong>';
 if (!isset($_POST['razorpay_payment_id'])) {
-    die("Access denied");
+    die($error . ' Direct acces is not allowed');
 }
 $success = true;
 

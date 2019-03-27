@@ -6,6 +6,8 @@ require('config.php');
 
 use Razorpay\Api\Api;
 
+$error = '<strong style="color:red;">Error: </strong>';
+
 if (empty($_POST)) {
     throw new Exception('Api form data is required');
 }
@@ -29,8 +31,11 @@ $api_data = array(
 );
 
 //Subscribe the plan
-$apiResponse = $subscription->subscribe($api_data);
-
+try {
+    $apiResponse = $subscription->subscribe($api_data);
+} catch (Exception $e) {
+    die($error . $e->getMessage());
+}
 $user = $apiResponse->user;
 $customer = $apiResponse->customer;
 $product = $apiResponse->product;
@@ -51,7 +56,11 @@ $orderData = [
 ];
 
 $api = new Api($keyId, $keySecret);
-$razorpayOrder = $api->order->create($orderData);
+try {
+    $razorpayOrder = $api->order->create($orderData);
+} catch (Exception $e) {
+    die($error . $e->getMessage());
+}
 $razorpayOrderId = $razorpayOrder['id'];
 $_SESSION['razorpay_order_id'] = $razorpayOrderId;
 $displayAmount = $amount = $orderData['amount'];

@@ -8,11 +8,12 @@ session_start();
 // Create the Razorpay Order
 use Razorpay\Api\Api;
 
-if (!isset($_GET['hostedpage'])) {	
-    throw new Exception('Direct acces is not allowed');
+$error = '<strong style="color:red;">Error: </strong>';
+if (!isset($_GET['hostedpage'])) {
+    die($error . ' Direct acces is not allowed');
 }
-if($_GET['hostedpage'] == ''){
-	throw new Exception('Hosted page data is required');
+if ($_GET['hostedpage'] == '') {
+    die($error . ' Hosted page data is required');
 }
 
 $hostedpage = $_GET['hostedpage'];
@@ -21,7 +22,7 @@ $subscription = new Subscription($apiKey, $apiSecret);
 try {
     $api_data = $subscription->hostedPage($hostedpage);
 } catch (Exception $e) {
-    die($e->getMessage());
+    die($error . $e->getMessage());
 }
 $user = $api_data->user;
 $customer = $api_data->customer;
@@ -42,8 +43,11 @@ $orderData = [
     'payment_capture' => 1 // auto capture
 ];
 $api = new Api($keyId, $keySecret);
-$razorpayOrder = $api->order->create($orderData);
-
+try {
+    $razorpayOrder = $api->order->create($orderData);
+} catch (Exception $e) {
+    die($error . $e->getMessage());
+}
 $razorpayOrderId = $razorpayOrder['id'];
 
 $_SESSION['razorpay_order_id'] = $razorpayOrderId;
@@ -87,4 +91,3 @@ if ($displayCurrency !== 'INR') {
 $json = json_encode($data);
 //Process the razorpay checkout
 require("checkout.php");
-
