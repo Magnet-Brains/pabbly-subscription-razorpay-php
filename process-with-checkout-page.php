@@ -12,10 +12,6 @@ if (!isset($_GET['hostedpage']) && !$_GET['hostedpage']) {
     throw new Exception('Hosted page data is required');
 }
 
-//Api credential of Pabbly Subscription
-$apiKey = ""; //Put your api key here
-$apiSecret = ""; // Put your api secret here
-
 $hostedpage = $_GET['hostedpage'];
 $subscription = new Subscription($apiKey, $apiSecret);
 //Get hosted page details
