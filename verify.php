@@ -37,9 +37,6 @@ if (empty($_POST['razorpay_payment_id']) === false) {
 if ($success === true) {
     $html = "<p>Your payment was successful</p>
              <p>Payment ID: {$_POST['razorpay_payment_id']}</p>";
-    //Api credential of Pabbly Subscription
-    $apiKey = ""; //Put your api key here
-    $apiSecret = ""; // Put your api secret here
     $subscription = new Subscription($apiKey, $apiSecret);
     //Record payment for the subscribed plan
     //Parameters would be payment_mode, payment_note and transaction details
