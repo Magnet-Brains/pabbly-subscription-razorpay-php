@@ -14,9 +14,6 @@ session_start();
 //Subscription plan id
 $plan_id = "Put your Pabbly Subscription plan id here";
 
-//Api credential of Pabbly Subscription
-$apiKey = ""; //Put your api key here
-$apiSecret = ""; // Put your api secret here
 $subscription = new Subscription($apiKey, $apiSecret);
 $api_data = array(
     'first_name' => $_POST['first_name'],
