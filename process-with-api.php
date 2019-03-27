@@ -31,10 +31,13 @@ $api_data = array(
 //Subscribe the plan
 $apiResponse = $subscription->subscribe($api_data);
 
+$user = $apiResponse->user;
 $customer = $apiResponse->customer;
 $product = $apiResponse->product;
 $plan = $apiResponse->plan;
 $invoice = $apiResponse->invoice;
+$currency = $user->currency;
+$displayCurrency = $currency;
 
 //
 // We create an razorpay order using orders api
@@ -43,7 +46,7 @@ $invoice = $apiResponse->invoice;
 $orderData = [
     'receipt' => $invoice->invoice_id,
     'amount' => $invoice->due_amount * 100, // 2000 rupees in paise
-    'currency' => 'INR',
+    'currency' => $currency,
     'payment_capture' => 1 // auto capture
 ];
 

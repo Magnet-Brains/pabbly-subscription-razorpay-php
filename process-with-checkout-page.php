@@ -8,8 +8,11 @@ session_start();
 // Create the Razorpay Order
 use Razorpay\Api\Api;
 
-if (!isset($_GET['hostedpage']) && !$_GET['hostedpage']) {
-    throw new Exception('Hosted page data is required');
+if (!isset($_GET['hostedpage'])) {	
+    throw new Exception('Direct acces is not allowed');
+}
+if($_GET['hostedpage'] == ''){
+	throw new Exception('Hosted page data is required');
 }
 
 $hostedpage = $_GET['hostedpage'];
@@ -20,10 +23,13 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
+$user = $api_data->user;
 $customer = $api_data->customer;
 $product = $api_data->product;
 $plan = $api_data->plan;
 $invoice = $api_data->invoice;
+$currency = $user->currency;
+$displayCurrency = $currency;
 
 //
 // We create an razorpay order using orders api
@@ -32,7 +38,7 @@ $invoice = $api_data->invoice;
 $orderData = [
     'receipt' => $invoice->invoice_id,
     'amount' => $invoice->due_amount * 100, // 2000 rupees in paise
-    'currency' => 'INR',
+    'currency' => $currency,
     'payment_capture' => 1 // auto capture
 ];
 $api = new Api($keyId, $keySecret);
