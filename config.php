@@ -7,7 +7,7 @@ $keySecret = ''; //Pur your Razorpay secret key
 $apiKey = ''; //Put Pabbly api key here
 $apiSecret = ''; //Put Pabbly api secret here
 
-$displayCurrency = 'INR';
+$displayCurrency = 'INR'; //Set your currency for Razorpay
 
 //These should be commented out in production
 // This is for error reporting
