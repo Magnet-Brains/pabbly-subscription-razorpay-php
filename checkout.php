@@ -5,7 +5,7 @@
     <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
     <input type="hidden" name="razorpay_signature"  id="razorpay_signature" >
 	  <!-- Any extra fields to be submitted with the form but not sent to Razorpay -->
-    <input type="hidden" name="shopping_order_id" value="<?php echo $invoice->id; ?>">
+    <input type="hidden" name="invoice_id" value="<?php echo $invoice->id; ?>">
     <?php if (isset($hostedpage)) { ?>
         <input type="hidden" name="hostedpage" value="<?php echo $hostedpage; ?>"> 
     <?php } ?>

@@ -87,7 +87,7 @@ class Subscription {
      * @param type $subscriptionId
      * @param type $customerId
      */
-    function redirectThanktyou($subscriptionId, $customerId) {
+    function redirectThankYou($subscriptionId, $customerId) {
         $redirect_url = $this->thankyouUrl . $subscriptionId . "/" . $customerId;
         header('Location:' . $redirect_url);
         exit;

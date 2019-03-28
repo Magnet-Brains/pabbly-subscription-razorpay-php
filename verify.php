@@ -42,11 +42,11 @@ if ($success === true) {
     //Record payment for the subscribed plan
     //Parameters would be payment_mode, payment_note and transaction details
     try {
-        $api_data = $subscription->recordPayment($_POST['shopping_order_id'], 'razorpay', '', $attributes);
+        $api_data = $subscription->recordPayment($_POST['invoice_id'], 'razorpay', '', $attributes);
 
         //If requested from Pabbly checkout page, redirect to thank you page
         if (isset($_POST['hostedpage'])) {
-            $subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+            $subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
         }
     } catch (Exception $e) {
         die($e->getMessage());
