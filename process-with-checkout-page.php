@@ -52,14 +52,9 @@ $razorpayOrderId = $razorpayOrder['id'];
 
 $_SESSION['razorpay_order_id'] = $razorpayOrderId;
 
-$displayAmount = $amount = $orderData['amount'];
+$amount = $orderData['amount'];
 
-if ($displayCurrency !== 'INR') {
-    $url = "https://api.fixer.io/latest?symbols=$displayCurrency&base=INR";
-    $exchange = json_decode(file_get_contents($url), true);
-
-    $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;
-}
+$displayAmount = $invoice->due_amount;
 
 $customer_name = $customer->first_name . ' ' . $customer->last_name;
 $data = [
