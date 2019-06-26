@@ -36,6 +36,20 @@ try {
 } catch (Exception $e) {
     die($error . $e->getMessage());
 }
+
+$_subscription = $apiResponse->subscription;
+
+//If the subscription is trial, activate it and redirect to thank you page
+if ($_subscription->trial_days > 0) {
+    //Do here your additional things if require.
+
+    //Activate the trial subscription
+    $api_data = $subscription->activateTrialSubscription($_subscription->id);
+
+    //Redirect to the thank you page
+    $subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+}
+
 $user = $apiResponse->user;
 $customer = $apiResponse->customer;
 $product = $apiResponse->product;
