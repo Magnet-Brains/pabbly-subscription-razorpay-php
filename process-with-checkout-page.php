@@ -34,7 +34,7 @@ if ($_subscription->trial_days > 0) {
     $api_data = $subscription->activateTrialSubscription($_subscription->id);
 
     //Redirect to the thank you page
-    $subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+    $subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
 }
 
 $user = $api_data->user;
