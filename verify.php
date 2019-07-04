@@ -43,10 +43,9 @@ if ($success === true) {
     //Parameters would be payment_mode, payment_note and transaction details
     try {
         $api_data = $subscription->recordPayment($_POST['invoice_id'], 'razorpay', '', $attributes);
-
         //If requested from Pabbly checkout page, redirect to thank you page
         if (isset($_POST['hostedpage'])) {
-            $subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
+            $subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id, $api_data->product->redirect_url);
         }
     } catch (Exception $e) {
         die($e->getMessage());
