@@ -38,18 +38,18 @@ try {
 }
 
 $_subscription = $apiResponse->subscription;
+if (!property_exists($api_data, "invoice")) {
+	//If the subscription is trial, activate it and redirect to thank you page
+	if ($_subscription->trial_days > 0) {
+		//Do here your additional things if require.
 
-//If the subscription is trial, activate it and redirect to thank you page
-if ($_subscription->trial_days > 0) {
-    //Do here your additional things if require.
+		//Activate the trial subscription
+		$api_data = $subscription->activateTrialSubscription($_subscription->id);
 
-    //Activate the trial subscription
-    $api_data = $subscription->activateTrialSubscription($_subscription->id);
-
-    //Redirect to the thank you page
-    $subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
+		//Redirect to the thank you page
+		$subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
+	}
 }
-
 $user = $apiResponse->user;
 $customer = $apiResponse->customer;
 $product = $apiResponse->product;

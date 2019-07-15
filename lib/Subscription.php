@@ -15,8 +15,8 @@ class Subscription {
         }
         $this->apiKey = $apiKey;
         $this->apiSecret = $apiSecret;
-        // $this->apiUrl = "http://localhost:1337/v1/";
-        // $this->thankyouUrl = "http://localhost:5000/thankyou/";
+        $this->apiUrl = "http://localhost:1337/v1/";
+        $this->thankyouUrl = "http://localhost:5000/thankyou/";
     }
 
     function apiPath($path) {
@@ -95,11 +95,11 @@ class Subscription {
         } else {
             $hostedpage = '';
         }
-        if ($redirect_url !== '') {
+        if ($redirect_url && $redirect_url !== '') {
             $redirect_url = $redirect_url . "?hostedpage=" . $hostedpage;
         } else {
             $redirect_url = $this->thankyouUrl . $subscriptionId . "/" . $customerId;
-        }
+        }        
         header('Location:' . $redirect_url);
         exit;
     }
